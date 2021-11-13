@@ -1,0 +1,8 @@
+---
+# tasks file for docker-registry
+- name: Tag and push to docker hub
+  docker_image:
+    name: zainebeya/myapp:angularappCD
+    repository: zainebeya/myapp
+    tag: angularappCD
+    push: yes
