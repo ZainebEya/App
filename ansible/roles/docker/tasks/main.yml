@@ -1,0 +1,29 @@
+---
+#buid project
+#- name: build app
+#shell: ng build --configuration=production
+ 
+# tasks file for buildDocker
+#- name: install npm
+#  apt: name=npm
+#- name: running npm install
+#  shell: npm install /var/lib/jenkins/workspace/buildFront
+#- name: build app
+#  shell: ng build --prod
+- name: create image docker
+  docker_image:
+    name: Myapp
+    build:
+     path: /var/lib/jenkins/workspace/App
+     pull: no
+    source: build
+    state: present
+    force_source: true
+- name: run container docker
+  docker_container:
+    name: App_container
+    image: Myapp:latest
+    state: started
+    recreate: true
+    ports:
+     - "4200:80"
